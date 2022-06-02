@@ -32,6 +32,9 @@ public class UserVO {
     @OneToMany(mappedBy = "userVO", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BoardVO> boardList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "userVO", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BoardLikeVO> likeList = new ArrayList<>();
+
     @Builder
     public UserVO(Long id, String nickname,String accountId,String accountType){
         this.id=id;

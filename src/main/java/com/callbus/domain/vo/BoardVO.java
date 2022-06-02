@@ -5,6 +5,8 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tbl_board")
@@ -36,4 +38,9 @@ public class BoardVO {
     @ManyToOne
     @JoinColumn(name = "id")
     private UserVO userVO;
+
+    @OneToMany(mappedBy = "boardVO", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BoardLikeVO> likeList = new ArrayList<>();
+
+    
 }

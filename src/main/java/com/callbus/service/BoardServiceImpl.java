@@ -13,7 +13,8 @@ public class BoardServiceImpl implements BoardService{
     private final BoardRepository boardRepository;
 
     @Override
-    public List<BoardVO> getList() {
-        return boardRepository.findAll();
-    }
+    public List<BoardVO> getList() {return boardRepository.findAll();}
+
+    @Override
+    public BoardVO register(BoardVO boardVO) {return boardRepository.save(boardVO);}
 }

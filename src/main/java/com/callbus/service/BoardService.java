@@ -8,4 +8,5 @@ import java.util.List;
 @Service
 public interface BoardService {
     public List<BoardVO> getList();
+    public BoardVO register(BoardVO boardVO);
 }

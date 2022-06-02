@@ -4,7 +4,6 @@ import com.callbus.domain.repository.UserRepository;
 import com.callbus.domain.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 @Service
 @RequiredArgsConstructor
