@@ -1,10 +1,12 @@
 package com.callbus.service;
 
 import com.callbus.domain.repository.BoardRepository;
+import com.callbus.domain.vo.BoardDTO;
 import com.callbus.domain.vo.BoardVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,4 +19,5 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public BoardVO register(BoardVO boardVO) {return boardRepository.save(boardVO);}
+
 }

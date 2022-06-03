@@ -29,15 +29,15 @@ public class UserVO {
     @Column(name = "quit")
     private String quit;
 
-    @OneToMany(mappedBy = "userVO", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userVO")
     private List<BoardVO> boardList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "userVO", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
+    @JoinColumn(name = "id")
     private List<BoardLikeVO> likeList = new ArrayList<>();
 
     @Builder
-    public UserVO(Long id, String nickname,String accountId,String accountType){
-        this.id=id;
+    public UserVO(String nickname,String accountId,String accountType){
         this.accountId=accountId;
         this.accountType=accountType;
         this.nickname=nickname;

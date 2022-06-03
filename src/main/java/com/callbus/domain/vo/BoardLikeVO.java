@@ -1,7 +1,6 @@
 package com.callbus.domain.vo;
 
 import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -10,9 +9,8 @@ import javax.persistence.*;
 @Component
 @Table(name = "tbl_board_like")
 @Getter
-@ToString(of = {"id", "boardNum"})
+@ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @IdClass(BoardLikeID.class)
 public class BoardLikeVO{
     @Id
@@ -22,14 +20,6 @@ public class BoardLikeVO{
     @Id
     @Column(name = "board_num")
     private Long boardNum;
-
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private UserVO userVO;
-
-    @ManyToOne
-    @JoinColumn(name = "board_num")
-    private BoardVO boardVO;
 
     @Builder
     public BoardLikeVO(Long id, Long boardNum) {

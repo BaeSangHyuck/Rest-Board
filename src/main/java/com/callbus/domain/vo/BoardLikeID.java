@@ -15,10 +15,10 @@ public class BoardLikeID implements Serializable {
     @Column(name = "id")
     private Long id;
     @Column(name = "board_num")
-    private Long board_num;
+    private Long boardNum;
 
-    public BoardLikeID(Long id, Long board_num) {
+    public BoardLikeID(Long id, Long boardNum) {
         this.id = id;
-        this.board_num = board_num;
+        this.boardNum = boardNum;
     }
 }

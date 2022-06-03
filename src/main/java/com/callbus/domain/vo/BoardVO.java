@@ -22,25 +22,35 @@ public class BoardVO {
     @Column(name = "board_num")
     private Long boardNum;
     @Column(name = "board_title")
-    private String board_title;
+    private String boardTitle;
     @Column(name = "board_content")
-    private String board_content;
+    private String boardContent;
     @Column(name = "board_write_time")
-    private String board_write_time;
+    private String boardWriteTime;
     @Column(name = "board_update_time")
-    private String board_update_time;
+    private String boardUpdateTime;
     @Column(name = "board_delete_time")
-    private String board_delete_time;
+    private String boardDeleteTime;
     @Column(name = "delete_status")
     private String deleteStatus;
-
 
     @ManyToOne
     @JoinColumn(name = "id")
     private UserVO userVO;
 
-    @OneToMany(mappedBy = "boardVO", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany
+    @JoinColumn(name = "board_num")
     private List<BoardLikeVO> likeList = new ArrayList<>();
 
-    
+    @Builder
+    public BoardVO(Long boardNum, String boardTitle, String boardContent, String boardWriteTime, String boardUpdateTime, String boardDeleteTime, String deleteStatus) {
+        this.boardNum = boardNum;
+        this.boardTitle = boardTitle;
+        this.boardContent = boardContent;
+        this.boardWriteTime = boardWriteTime;
+        this.boardUpdateTime = boardUpdateTime;
+        this.boardDeleteTime = boardDeleteTime;
+        this.deleteStatus = deleteStatus;
+    }
+
 }
