@@ -1,0 +1,45 @@
+create database board;
+
+use board;
+
+create table tbl_user(
+	id int primary key auto_increment,
+	nickname varchar(1000),
+	account_type varchar(500),
+	account_id varchar(1000),
+	quit char(1) default 0 
+);
+
+create table tbl_board(
+	board_num int primary key auto_increment,
+	board_title varchar(1000),
+	board_content varchar(2000),
+	board_write_time timestamp default now(),
+	board_update_time timestamp,
+	board_delete_time timestamp,
+	delete_status char(1) default 0,
+	id int,
+	constraint fk_board foreign key(id) references tbl_user (id)  on delete cascade
+);
+
+create table tbl_board_like(
+	id int,
+	board_num int,
+	constraint fk_liking foreign key(id) references tbl_user (id)  on delete cascade,
+	constraint fk_liked foreign key(board_num) references tbl_board (board_num)  on delete cascade,
+	primary key(id,board_num)
+)
+
+create table tbl_reply(
+	reply_num int primary key auto_increment,
+	reply_content varchar(2000),
+	board_num int,
+	id int,
+	constraint fk_replyId foreign key(id) references tbl_user (id)  on delete cascade,
+	constraint fk_replyBoard foreign key(board_num) references tbl_board (board_num)  on delete cascade
+);
+
+select * from tbl_user ;
+select * from tbl_board ;
+select * from tbl_board_like ;
+select * from tbl_reply;
