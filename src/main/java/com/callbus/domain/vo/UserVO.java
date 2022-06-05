@@ -48,4 +48,21 @@ public class UserVO {
         this.nickname=nickname;
     }
 
+    public UserVO transform(UserVO userVO) {
+        String accountType;
+        switch (userVO.getAccountType()) {
+            case "Lessee":
+                accountType = "임차인";
+                break;
+            case "Lessor":
+                accountType = "임대인";
+                break;
+            default:
+                accountType = "공인중개사";
+                break;
+        }
+        userVO.setAccountType(accountType);
+        return userVO;
+    }
+
 }

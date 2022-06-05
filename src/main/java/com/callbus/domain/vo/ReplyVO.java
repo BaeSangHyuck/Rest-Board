@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Setter
 @ToString(exclude = {"userVO","boardVO"})
 @NoArgsConstructor
+@AllArgsConstructor
 @DynamicInsert
 public class ReplyVO {
     @Id
@@ -32,10 +33,16 @@ public class ReplyVO {
     @JoinColumn(name="board_num")
     private BoardVO boardVO;
 
-    @Builder
-    public ReplyVO(String replyContent, UserVO userVO, BoardVO boardVO) {
-        this.replyContent = replyContent;
-        this.userVO = userVO;
-        this.boardVO = boardVO;
+    public void update(ReplyDTO replyDTO){
+        this.replyContent=replyDTO.getReplyContent();
+        this.replyNum=replyDTO.getReplyNum();
+        this.boardVO=replyDTO.getBoardVO();
+        this.userVO=replyDTO.getUserVO();
+    }
+
+    public void register(ReplyDTO replyDTO){
+        this.replyContent=replyDTO.getReplyContent();
+        this.boardVO=replyDTO.getBoardVO();
+        this.userVO=replyDTO.getUserVO();
     }
 }

@@ -5,7 +5,9 @@ import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -60,9 +62,27 @@ public class BoardVO {
     }
 
     public void update(BoardDTO boardDTO) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh");
         this.boardTitle = boardDTO.getBoardTitle();
         this.boardContent = boardDTO.getBoardContent();
-        this.boardUpdateTime = boardDTO.getBoardUpdateTime();
+        this.boardUpdateTime = sdf.format(date);
+    }
+
+    public void delete(Long boardNum) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh");
+        this.deleteStatus="1";
+        this.boardDeleteTime = sdf.format(date);
+    }
+
+    public void register(BoardDTO boardDTO) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh");
+        this.boardTitle = boardDTO.getBoardTitle();
+        this.boardContent = boardDTO.getBoardContent();
+        this.boardWriteTime = sdf.format(date);
+        this.userVO=boardDTO.getUserVO();
     }
 
 }

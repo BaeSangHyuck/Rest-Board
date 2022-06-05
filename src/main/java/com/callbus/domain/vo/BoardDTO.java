@@ -47,4 +47,5 @@ public class BoardDTO {
                 deleteStatus(boardVO.getDeleteStatus()).build();
         return boardDTO;
     }
+
 }
