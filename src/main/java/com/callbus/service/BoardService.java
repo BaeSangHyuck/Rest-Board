@@ -42,14 +42,14 @@ public class BoardService {
     public BoardVO remove(Long boardNum) {
         //삭제시 삭제시간 입력 및 상태표시 1로 변경(1은 삭제, 0은 기본)
         BoardVO boardVO = boardRepository.findById(boardNum).orElseThrow();
-        boardVO.delete(boardNum);
+        boardVO.delete();
         return boardVO;
     }
 
     @Transactional
     public BoardVO update(BoardDTO boardDTO, Long boardNum) {
         BoardVO boardVO = boardRepository.findById(boardNum).orElseThrow();
-        boardVO.update(boardDTO); // 변경감지
+        boardVO.update(boardDTO);
 
         return boardVO;
     }

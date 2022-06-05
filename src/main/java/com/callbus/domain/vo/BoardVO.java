@@ -49,17 +49,6 @@ public class BoardVO {
     @OneToMany(mappedBy = "boardVO",cascade = CascadeType.ALL)
     private List<ReplyVO> replyList = new ArrayList<>();
 
-    @Builder
-    public BoardVO(Long boardNum, String boardTitle, String boardContent, String boardWriteTime, String boardUpdateTime, String boardDeleteTime, String deleteStatus, UserVO userVO) {
-        this.boardNum = boardNum;
-        this.boardTitle = boardTitle;
-        this.boardContent = boardContent;
-        this.boardWriteTime = boardWriteTime;
-        this.boardUpdateTime = boardUpdateTime;
-        this.boardDeleteTime = boardDeleteTime;
-        this.deleteStatus = deleteStatus;
-        this.userVO = userVO;
-    }
 
     public void update(BoardDTO boardDTO) {
         Date date = new Date();
@@ -69,7 +58,7 @@ public class BoardVO {
         this.boardUpdateTime = sdf.format(date);
     }
 
-    public void delete(Long boardNum) {
+    public void delete() {
         Date date = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh");
         this.deleteStatus="1";

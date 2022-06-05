@@ -41,12 +41,6 @@ public class UserVO {
     @JsonIgnore
     private List<BoardLikeVO> likeList = new ArrayList<>();
 
-    @Builder
-    public UserVO(String nickname,String accountId,String accountType){
-        this.accountId=accountId;
-        this.accountType=accountType;
-        this.nickname=nickname;
-    }
 
     public UserVO transform(UserVO userVO) {
         String accountType;
