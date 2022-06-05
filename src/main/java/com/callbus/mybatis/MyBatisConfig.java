@@ -16,35 +16,20 @@ import java.io.IOException;
 
 @Configuration
 @RequiredArgsConstructor
-@MapperScan("com.callbus.mapper")
 public class MyBatisConfig {
+    //    커넥션 풀 및 MyBatis에 필요한 요소를 메모리에 할당 및 관리, xml과 java연동에 필요한 경로 관리
     private final ApplicationContext applicationContext;
 
-    @Bean
-    @ConfigurationProperties(prefix = "spring.datasource.hikari") //
-    public HikariConfig hikariConfig(){
+    @Bean // 메소드의 리턴 객체를 스프링 컨테이너에 등록, @Configuration 또는 @Component가 작성된 클래스의 메소드에 사용
+    @ConfigurationProperties(prefix = "spring.datasource.hikari") // 상위 경로 고정
+//    application.properties에 작성된 #JDBC datasource 정보 설정
+    public HikariConfig hikariConfig() {
         return new HikariConfig();
     }
 
     @Bean
-    public DataSource dataSource(){
+    public DataSource dataSource() {
         return new HikariDataSource(hikariConfig());
     }
 
-    @Bean
-    public SqlSessionFactory sqlSessionFactory() throws IOException {
-        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
-        sqlSessionFactoryBean.setDataSource(dataSource());
-        sqlSessionFactoryBean.setMapperLocations(applicationContext.getResources("classpath*:/mapper/*.xml"));
-        sqlSessionFactoryBean.setConfigLocation(applicationContext.getResource("classpath:/config/config.xml"));
-
-        try {
-            SqlSessionFactory factory = sqlSessionFactoryBean.getObject();
-            factory.getConfiguration().setMapUnderscoreToCamelCase(true);
-            return factory;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 }

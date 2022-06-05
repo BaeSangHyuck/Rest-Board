@@ -2,6 +2,7 @@ package com.callbus.service;
 
 import com.callbus.domain.repository.UserRepository;
 import com.callbus.domain.vo.UserVO;
+import com.callbus.exception.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,8 @@ public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
 
     public UserVO getUser(String authorization) {
-        String type = authorization.split(" ")[0];
-        String id = authorization.split(" " )[1];
-        UserVO userVO = userRepository.findByAccountId(id);
+        Long id = Long.valueOf(authorization.split(" " )[1]);
+        UserVO userVO = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         return userVO;
     }
 }

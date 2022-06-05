@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "tbl_board")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"userVO","likeList","replyList"})
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicInsert
@@ -34,16 +34,21 @@ public class BoardVO {
     @Column(name = "delete_status")
     private String deleteStatus;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinColumn(name = "id")
     private UserVO userVO;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     @JoinColumn(name = "board_num")
     private List<BoardLikeVO> likeList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "boardVO",cascade = CascadeType.ALL)
+    private List<ReplyVO> replyList = new ArrayList<>();
+
     @Builder
-    public BoardVO(Long boardNum, String boardTitle, String boardContent, String boardWriteTime, String boardUpdateTime, String boardDeleteTime, String deleteStatus) {
+    public BoardVO(Long boardNum, String boardTitle, String boardContent, String boardWriteTime, String boardUpdateTime, String boardDeleteTime, String deleteStatus, UserVO userVO) {
         this.boardNum = boardNum;
         this.boardTitle = boardTitle;
         this.boardContent = boardContent;
@@ -51,6 +56,13 @@ public class BoardVO {
         this.boardUpdateTime = boardUpdateTime;
         this.boardDeleteTime = boardDeleteTime;
         this.deleteStatus = deleteStatus;
+        this.userVO = userVO;
+    }
+
+    public void update(BoardDTO boardDTO) {
+        this.boardTitle = boardDTO.getBoardTitle();
+        this.boardContent = boardDTO.getBoardContent();
+        this.boardUpdateTime = boardDTO.getBoardUpdateTime();
     }
 
 }

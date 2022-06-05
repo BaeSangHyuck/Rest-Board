@@ -1,5 +1,6 @@
 package com.callbus.repository;
 
+import com.callbus.domain.repository.BoardLikeRepository;
 import com.callbus.domain.repository.BoardRepository;
 import com.callbus.domain.vo.BoardVO;
 import com.callbus.domain.vo.UserVO;
@@ -18,6 +19,9 @@ public class BoardRepositoryTests {
     @Autowired
     private BoardRepository boardRepository;
 
+    @Autowired
+    private BoardLikeRepository boardLikeRepository;
+
 //    @Test
 //    public void boardRegisterTest(){
 //        BoardVO boardVO = new BoardVO();
@@ -35,10 +39,15 @@ public class BoardRepositoryTests {
 //        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm");
 //        boardRepository.save(BoardVO.builder().boardNum(1L).boardTitle("반가워용").boardContent("안녕하세요").boardUpdateTime(String.valueOf(sdf.format(date))).build());
 //    }
+//
+//    @Test
+//    public void getCountTest(){
+//        log.info(boardLikeRepository.countByBoardNum(1L).toString());
+//    }
 
-    @Test
-    public void boardDetailTest(){
-
-    }
+//    @Test
+//    public void getLikedTest(){
+//        log.info(""+boardLikeRepository.existsByIdAndBoardNum(2L,1L));
+//    }
 
 }

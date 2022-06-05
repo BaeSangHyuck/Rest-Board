@@ -1,5 +1,6 @@
 package com.callbus.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Table(name = "tbl_user")
 @Getter
 @Setter
-@ToString(of = {"id","nickname","accountType","accountId","quit"})
+@ToString(exclude = {"boardList","replyList","likeList"})
 @NoArgsConstructor
 @AllArgsConstructor
 @DynamicInsert
@@ -32,8 +33,12 @@ public class UserVO {
     @OneToMany(mappedBy = "userVO")
     private List<BoardVO> boardList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "userVO")
+    private List<ReplyVO> replyList = new ArrayList<>();
+
     @OneToMany
     @JoinColumn(name = "id")
+    @JsonIgnore
     private List<BoardLikeVO> likeList = new ArrayList<>();
 
     @Builder

@@ -8,6 +8,13 @@ import java.util.List;
 
 @Service
 public interface BoardService {
-    public List<BoardVO> getList();
-    public BoardVO register(BoardVO boardVO);
+   List<BoardDTO> getList(Long id);
+   BoardVO register(BoardVO boardVO,String authorization);
+   BoardVO remove(Long boardNum);
+   BoardVO update(BoardDTO boardDTO, Long boardNum);
+   BoardDTO getDetail(Long id, Long boardNum);
+   BoardDTO setBoardInfo(BoardDTO boardDTO, Long id, Long boardNum);
+   boolean likeBoard (Long id, Long boardNum);
+   BoardVO getBoard(Long boardNum);
+
 }
