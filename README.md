@@ -1,6 +1,4 @@
-# callbus
-
-## 구동방식
+# 구동방식
 회원 로그인 시 헤더에 입력된 Authorization으로 사용회원을 검색하고 회원 및 비회원을 나눌 수 있습니다.
 UserService에 있는 getUser메소드를 사용하여 Authorization에 있는 userId로 회원정보를 조회합니다.
 
